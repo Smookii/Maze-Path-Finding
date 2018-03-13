@@ -21,8 +21,8 @@ Dans le dossier ce trouve un fichier de configuration *config.xml* qui par défa
 
 
 [posExample]:
-https://github.com/Smookii/Maze-Path-Finding/Documentation/Image/PosExample.PNG "Exemple de fichier de position"
+https://github.com/Smookii/Maze-Path-Finding/blob/master/Documentation/Image/PosExample.PNG "Exemple de fichier de position"
 
 
 [config]:
-https://github.com/Smookii/Maze-Path-Finding/Documentation/Image/config.PNG "config.xml"
+https://github.com/Smookii/Maze-Path-Finding/blob/master/Documentation/Image/config.PNG "config.xml"
