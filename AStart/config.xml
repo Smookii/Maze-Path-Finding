@@ -1,0 +1,22 @@
+<config>
+  <SQUAREFIND></SQUAREFIND>
+  <COLORTEINT>True</COLORTEINT>
+  <ANIMATION first="1" second="1"/>
+  <ANIMATIONDELAY>35</ANIMATIONDELAY>
+  <DISTANCEMAX>5000</DISTANCEMAX>
+  <BORDERSIZE>3</BORDERSIZE>
+  <COLORDEP>
+    <ref>2</ref>
+    <B>100</B>
+    <G>100</G>
+    <R>250</R>
+  </COLORDEP>
+  <COLOREND>
+      <ref>1</ref>
+      <B>100</B>
+      <G>250</G>
+      <R>100</R>
+  </COLOREND>
+</config>
+
+
