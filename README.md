@@ -66,9 +66,9 @@ Permet de définir les conditions de la couleur du pixel de départ, pour la rec
 Le paramètre *ref* permet déterminer qu'elle valeurs de couleur sera principale.   
 Dans l'exemple de config, un pixel sera considéré comme point de départ si  : 
 
-pixel.bleu < 100
-pixel.green < 100
-pixel.red > 250
+pixel.bleu < 100   
+pixel.green < 100   
+pixel.red > 250   
 
 **COLOREND**   
 Permet de définir les conditions de la couleur du pixel de d'arrivée, pour la recherche de position automatique.  
