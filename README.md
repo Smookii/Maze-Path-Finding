@@ -19,6 +19,61 @@ Si vous ne spécifiez pas de fichier de position, le programme va tenter de les 
 Dans le dossier ce trouve un fichier de configuration *config.xml* qui par défaut contient les informations suivantes :  
 ![alt text][config]
 
+**SUAREFIND**   
+Détermine comment l'algorithme va rechercher le chemin vers la sortie à True le chemin sera recherché sur tous les pixels adjaçant diagonales inclusent :   
+
+|      |          |        |          |       |
+| :-----------: | :-------------: | :------------: | :-------------: | :------------: |
+| 3 | 3 | 3 | 3 | 3 |
+| 3 | 2 | 2 | 2 | 3 |
+| 3 | 2 | 1 | 2 | 3 |
+| 3 | 2 | 2 | 2 | 3 |
+| 3 | 3 | 3 | 3 | 3 |
+
+Si on le laisse vide les diagonales ne seront pas inclusent :
+
+|      |          |        |          |       |
+| :-----------: | :-------------: | :------------: | :-------------: | :------------: |
+| 5 | 4 | 3 | 4 | 5 |
+| 4 | 3 | 2 | 3 | 4 |
+| 3 | 2 | 1 | 2 | 3 |
+| 4 | 3 | 2 | 3 | 4 |
+| 5 | 4 | 3 | 4 | 5 |
+
+**COLORTEINT**   
+A True les pixels que l'algoritme à traverser auront une teinte dégradé ce qui peux simplifier l'observation du labyrinthe. Laisser vide les pixels auront une couleur unie.
+
+
+
+**ANIMATION.first**   
+A "1" l'attribut permet d'afficher tous le déroulement de la partie de recherche, à "0" l'algorithme ne s'affichera qu'une fois déroulé.
+
+**ANIMATION.second**   
+A "1" l'attribut permet d'afficher tous le déroulement de la partie de retour, à "0" l'algorithme ne s'affichera qu'une fois déroulé.
+
+**ANIMATIONDELAY**   
+Permet de gérer la fréquence d'affichage du déroulement de l'algorithme, la valeurs du champs déterminera le nombre de d'itération de l'algorithme avant le raffrachissement.
+
+**DISTANCEMAX**   
+Ce paramètre détermine le nombre d'itérations maximum que l'algorithme va faire avant de s'arrêter. Ce qui déclenche l'erreur :   
+*La distance max à été atteinte, réessayé en augmentant le DISTANCEMAX dans config.xml*
+
+**BORDERSIZE**     
+Ce paramètre permet de spécifié la taille minimum des murs du labyrinthe utilisé, ce qui permet à l'algorithme de faire de plus grands pas à chaque itérations.
+
+**COLORDEP**   
+Permet de définir les conditions de la couleur du pixel de départ, pour la recherche de position automatique. 
+Le paramètre *ref* permet déterminer qu'elle valeurs de couleur sera principale.   
+Dans l'exemple de config, un pixel sera considéré comme point de départ si  : 
+
+pixel.bleu < 100
+pixel.green < 100
+pixel.red > 250
+
+**COLOREND**   
+Permet de définir les conditions de la couleur du pixel de d'arrivée, pour la recherche de position automatique.  
+
+
 
 [posExample]:
 https://github.com/Smookii/Maze-Path-Finding/blob/master/Documentation/Image/PosExample.PNG "Exemple de fichier de position"
