@@ -18,6 +18,7 @@ RELATIVERIGHT = {
 }
 
 def follow_wall(img):
+    path = list()
     steps = 0
     x = 0
     y = 0
@@ -27,28 +28,36 @@ def follow_wall(img):
     while not out(img, x, y):
         steps = steps + 1
         newPos = step(img, x, y, d)
-        x = newPos[0]
-        y = newPos[1]
-        d = newPos[2]
-        img[y][x] = GREY
-        if steps % 100 == 0:
-            cv2.imshow('maze', img)
-            cv2.waitKey(delay = 1)
+        if newPos is not None:
+            x = newPos[0]
+            y = newPos[1]
+            d = newPos[2]
+            path.append((x, y))
+        else:
+            print("exit found ! ", newPos)
+            return path
         if out(img, x, y):
             print("exit found !")
-            return
+            return path
+
+def playback(path, img, speed, color):
+    steps = 0
+    backtorgb = cv2.cvtColor(img,cv2.COLOR_GRAY2RGB)
+    for i in range(len(path)):
+        backtorgb[path[i][1]][path[i][0]] = color
+        if steps % speed == 0:
+            cv2.imshow('maze', backtorgb)
+            cv2.waitKey(delay = 1)
+        steps = steps + 1
+
 
 def out(img, x, y):
-    if x < 0 or x > len(img[0]) or y < 0 or y > len(img[1]):
-        return True
-    else:
-        return False
+    return x < 0 or x >= len(img[0]) or y < 0 or y >= len(img[1])
 
 def step(img, x, y, direction):
     index_r = RELATIVERIGHT[direction]
     index = DIRECTION[direction]
-
-    if not out(img, x+index_r[0], y+index_r[1]) and not out(img, x+index[1], y+index[0]):
+    if not out(img, x + index_r[0], y + index_r[1]) and not out(img, x + index[0], y + index[1]):
         right_space = img[y + index_r[1]][x + index_r[0]]
         front_space = img[y + index[1]][x + index[0]]
 
@@ -117,8 +126,13 @@ def find_entry_point(img):
             #print("found, 4")
             return (height, y, direction)
 def main():
-    path = 'maze_solution_01.png'
+    path = 'maze_solution_06.png'
     img =  cv2.imread(path, 0)
-    follow_wall(img)
+    ret,thresh = cv2.threshold(img,127,255,cv2.THRESH_BINARY)
+    cv2.imshow('test', thresh)
+    cv2.waitKey()
+    path = follow_wall(thresh)
+    print(len(path))
+    playback(path, img, 50, (255, 125, 0))
 
 main()
