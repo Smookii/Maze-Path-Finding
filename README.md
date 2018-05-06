@@ -117,3 +117,45 @@ https://github.com/Smookii/Maze-Path-Finding/blob/master/Documentation/Image/ske
 
 [connectedComponent]:
 https://github.com/Smookii/Maze-Path-Finding/blob/master/Documentation/Image/connectedComponent.PNG "Exemple d'étiquetage d'un labyrinthe"
+
+## Naive Wall Follower
+
+A l'instar du simple maze solver, ce programme résouds les labyrinthes simples composées de 2 parties interconnectées. L'algorithme est simple et se contente de suivre continuellement le mur de droite (Solution naïve qui marche néanmoins dans un cas réel. 
+
+### Fonctionnement 
+
+L'algorithme commence par parcourir les bords du labyrinthe afin de trouver une entrée : il détermine en suite la direction de base à parcourir. A chaque itération, l'état de la case à droite et de devant (relativement à sa direction) est examinée. 
+
+```python
+...
+RELATIVERIGHT = {
+	'right' : (1, 1)
+	'left' : (-1, -1)
+	'up' : (1, -1)
+	'down' : (-1, 1)
+}
+
+index_r = RELATIVERIGHT[direction]
+index = DIRECTION[direction]
+
+...
+```
+La direction a adopter ensuite est determinée en conséquence.
+
+Les points par lequels l'algo passe sont stockés pour le playback.
+
+### Utilisation
+
+python wall_follower.py <filename> <speed>
+
+
+- un premier enter montre l'image traitée (seuillage, élimination du bruit)
+- un deuxième enter montre la solution trouvée.
+
+### Condition du labyrinthe
+
+Le chemin doit être de couleur claire, et les murs d'une couleur fonçée. Les entrées doivent être directement présentes dans les bords de l'image (pas d'espace entre le cadre de l'image et le cadre du labyrinthe)
+
+### Exemple
+
+ex : python wall_follower.py maze_solution_03.png 10

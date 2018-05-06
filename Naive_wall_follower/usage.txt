@@ -1,0 +1,6 @@
+utilisation : 
+python wall_follower.py <filename> <speed>
+
+ex : python wall_follower.py maze_solution_03.png 10
+- un premier enter montre l'image traitée (seuillage, élimination du bruit)
+- un deuxième enter montre la solution trouvée.

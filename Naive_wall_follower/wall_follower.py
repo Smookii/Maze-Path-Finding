@@ -1,5 +1,6 @@
 import cv2
 import numpy as np
+import sys
 
 PATH = 255
 WALL = 0
@@ -126,13 +127,20 @@ def find_entry_point(img):
             #print("found, 4")
             return (height, y, direction)
 def main():
-    path = 'maze_solution_06.png'
-    img =  cv2.imread(path, 0)
-    ret,thresh = cv2.threshold(img,127,255,cv2.THRESH_BINARY)
-    cv2.imshow('test', thresh)
-    cv2.waitKey()
-    path = follow_wall(thresh)
-    print(len(path))
-    playback(path, img, 50, (255, 125, 0))
+    if len(sys.argv) < 3 :
+        print("Usage : \npython wall-follower.py <filename> <playback speed>\n python wall-follower.py auto")
+    else:
+	path = sys.argv[1]
+	playback_speed = int(sys.argv[2])
+	old_img = cv2.imread(path)
+        img =  cv2.imread(path, 0)
+	ret,thresh = cv2.threshold(img,127,255,cv2.THRESH_BINARY)
+	cv2.imshow('original', old_img)
+        cv2.waitKey()
+        cv2.imshow('test', thresh)
+	cv2.waitKey()
+	path = follow_wall(thresh)
+	print(len(path))
+	playback(path, img, playback_speed, (255, 125, 0))
 
 main()
