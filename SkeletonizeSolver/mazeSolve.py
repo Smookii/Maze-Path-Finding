@@ -79,7 +79,6 @@ for x in range(0,skel.shape[0]):
                 deadEnd.append((x,y))
 
 
-#Ca pue de ouf ICI MERDE MERDE MERDE
 depPoint, endPoint = ReadPositionFile('param.xml')
 diffDep = 8000000
 diffEnd = 8000000
@@ -135,59 +134,5 @@ for tp in deadEnd:
             val = -1
 
 cv2.imshow("rmDead",maze)
-cv2.imwrite("dead1.png",maze)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-deadEnd = []
-for x in range(0,maze.shape[0]):
-    for y in range(0,maze.shape[1]):
-        if maze[x][y][0] == 255:
-            val = 0
-            for i in range(0,len(around)):
-                try:
-                    if maze[x+around[i]][y+around2[i]][0] == 255:
-                        val+=1
-                except:
-                    val = 4
-            if val < 2:
-                deadEnd.append((x,y))
-                
-# un truc merde ici je pense
-try:
-    deadEnd.remove(dp)
-    deadEnd.remove(ep)
-except:
-    pass
-
-for tp in deadEnd:
-    # partir des dead end et supprimer iterativement les pixels avec un seul pixel connetcé
-    x=tp[0]
-    y=tp[1]
-    maze[x][y] = [0,0,0]
-    val = 0
-
-    while val != -1 :
-        val = 0
-        xoffset = 0
-        yoffset = 0
-        for j in range(0,len(around)):
-            try:
-                if maze[x+around[j]][y+around2[j]][0] == 255:
-                    xoffset = around[j]
-                    yoffset = around2[j]
-                    val += 1
-            except:
-                    val = 4
-        if val == 1 :
-            maze[x][y] = [0,0,0]
-            x = x+xoffset
-            y = y+yoffset
-        else:
-            maze[x][y] = [0,0,0]
-            val = -1
-
-cv2.imshow("rmDead",maze)
-cv2.imwrite("dead2.png",maze)
 cv2.waitKey(0)
 cv2.destroyAllWindows()

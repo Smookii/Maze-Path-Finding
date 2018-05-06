@@ -2,6 +2,17 @@
 
 Les différents algorithmes ont leurs propres dossiers, dans lesquels se trouvent les labyrinthes de test.
 
+## Simple Maze Solver
+Dans le dossier SimpleMazeSolver se trouve un algorithme utilisant le connected component labeling pour résoudre un labyrinthe, il se lance avec la commande suivante :
+*python mazeSolveSimple.py <nom_laby>*  
+*<nom_laby>* étant l'image du labyrinthe .
+L'idée de l'algorithme vient de [ce site](http://www.crisluengo.net/index.php/archives/277).
+
+### Fonctionnement
+Cet algorithme est capable de résoudre nimporte quel labyrinthe simple c'est à dire ne comportant que 2 parties interconnectées. Pour se faire l'algorithme utilise la fonction `connectedComponents(img)` d'openCV qui permet de marquer les différentes zone de l'image qui sont interconnectées donc dans notre cas nous auront deux zones marquées:
+![alt text][connectedComponent]
+
+On peut facilement remarquer que la solution du labyrinthe se trouve entre les deux zones colorées. Il suffit donc de dilater l'une des zone et de soustraire la zone a cette dilatation pour obtenir une solution. Il est important de noter que si le labyrinthe est plus complexe donc qu'il a plus de deux zones interconnectées cet algorithme ne marche plus. Le dossier SimpleMazeSolver contient deux images de labyrinthe avec lesquels cet algorithme marche.
 ## AStart
 
 Dans le dossier Astart se trouve un algorithme de type AStar que vous pouvez lancer avec la commande :  
@@ -62,9 +73,9 @@ Ce paramètre détermine le nombre d'itérations maximum que l'algorithme va fai
 Ce paramètre permet de spécifié la taille minimum des murs du labyrinthe utilisé, ce qui permet à l'algorithme de faire de plus grands pas à chaque itérations.
 
 **COLORDEP**   
-Permet de définir les conditions de la couleur du pixel de départ, pour la recherche de position automatique. 
+Permet de définir les conditions de la couleur du pixel de départ, pour la recherche de position automatique.
 Le paramètre *ref* permet déterminer qu'elle valeurs de couleur sera principale.   
-Dans l'exemple de config, un pixel sera considéré comme point de départ si  : 
+Dans l'exemple de config, un pixel sera considéré comme point de départ si  :
 
 pixel.bleu < 100   
 pixel.green < 100   
@@ -81,3 +92,6 @@ https://github.com/Smookii/Maze-Path-Finding/blob/master/Documentation/Image/Pos
 
 [config]:
 https://github.com/Smookii/Maze-Path-Finding/blob/master/Documentation/Image/config.PNG "config.xml"
+
+[connectedComponent]:
+https://github.com/Smookii/Maze-Path-Finding/blob/master/Documentation/Image/connectedComponent.PNG "Exemple d'étiquetage d'un labyrinthe"
