@@ -49,7 +49,6 @@ skel[skel>0] = 255
 #         done = True
 
 cv2.imshow("skel",skel)
-cv2.imwrite('skel.png',skel)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 

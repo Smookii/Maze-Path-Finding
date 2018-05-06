@@ -6,7 +6,7 @@ Les différents algorithmes ont leurs propres dossiers, dans lesquels se trouven
 Dans le dossier SimpleMazeSolver se trouve un algorithme utilisant le connected component labeling pour résoudre un labyrinthe, il se lance avec la commande suivante :
 
 *python mazeSolveSimple.py <nom_laby>*  
-*<nom_laby>* étant l'image du labyrinthe .
+*<nom_laby>* étant l'image du labyrinthe.
 
 L'idée de l'algorithme vient de [ce site](http://www.crisluengo.net/index.php/archives/277).
 
@@ -15,7 +15,24 @@ Cet algorithme est capable de résoudre nimporte quel labyrinthe simple c'est à
 ![alt text][connectedComponent]
 
 On peut facilement remarquer que la solution du labyrinthe se trouve entre les deux zones colorées. Il suffit donc de dilater l'une des zone et de soustraire la zone a cette dilatation pour obtenir une solution. Il est important de noter que si le labyrinthe est plus complexe donc qu'il a plus de deux zones interconnectées cet algorithme ne marche plus. Le dossier SimpleMazeSolver contient deux images de labyrinthe avec lesquels cet algorithme marche.
-## AStart
+
+## Skeletonize Maze Solve
+Dans le dossier SkeletonizeSolver se trouve un algorithme utilisant la skeletonization pour résoudre un lanyrinthe, il se lance avec la commande suivante :
+
+*python SkeletonizeMazeSolve.py <nom_laby>*  
+*<nom_laby>* étant l'image du labyrinthe.
+
+L'idée de l'algorithme vient de [ce site](http://www.crisluengo.net/index.php/archives/277).
+
+### Fonctionnement
+L'algorithme utilise une fonction de skeletonization afin de définir tous les chemin possible du labyrinthe:
+![alt text][Skelet]
+
+Ensuite l'idée est de repérer les deadEnd de ce labyrinthe c'est à dire les pixel qui correspondent à des culs de sac et de supprimer itérativement les chemin menant a ces culs de sac. Pour se faire on parcour les pixel depuis les deadEnd et on supprime chaque pixel qui n'est connecté qu'à un pixel et de cette manière on supprime les chemins ne menant à rien. Il faut noter que le départ et la fin du labyrinthe doivent être enlevé de la liste des deadEnd pour ne pas supprimer des chemin valides. Pour se faire on donne leur position dans le fichier param.xml.
+
+Après cette première étape il ne reste plus que des chemins valides et il suffirait d'utiliser un algorithme du genre d'Astar pour définir le chemin le plus cour et ne garder que celui-ci. Mais malheureusement l'étape de suppression des deadEnd ne marche pas assez bien dans notre implémentation pour qui ne reste plus que des chemins valides. Cela vient surement du fait que le squelette obtenu par la fonction `morphology.skeletonize()` de skimage ne donne pas un squelette d'aussi bonne qualité que dans ce [exemple](http://www.crisluengo.net/index.php/archives/277) (fonction bskeleton de MATLAB). Nous avons quand même mis à disposition le script avec un exemple d'image m^me s'il n'est pas totalement fonctionnel afin de donner une idée du fonctionnement.
+
+## AStar
 
 Dans le dossier Astart se trouve un algorithme de type AStar que vous pouvez lancer avec la commande :  
 *python Astart.py <nom_laby> <nom_pos>*  
@@ -94,6 +111,9 @@ https://github.com/Smookii/Maze-Path-Finding/blob/master/Documentation/Image/Pos
 
 [config]:
 https://github.com/Smookii/Maze-Path-Finding/blob/master/Documentation/Image/config.PNG "config.xml"
+
+[Skelet]:
+https://github.com/Smookii/Maze-Path-Finding/blob/master/Documentation/Image/skel.PNG "squelette d'un labyrinthe"
 
 [connectedComponent]:
 https://github.com/Smookii/Maze-Path-Finding/blob/master/Documentation/Image/connectedComponent.PNG "Exemple d'étiquetage d'un labyrinthe"
