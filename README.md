@@ -1,3 +1,15 @@
+Utilisation de la VM : 
+
+user : deb
+pwd : debbie
+pwd-root : debbie
+
+Avant tout, 
+
+```shell
+source activate traitement
+```
+
 # Maze-Path-Finding
 
 Les différents algorithmes ont leurs propres dossiers, dans lesquels se trouvent les labyrinthes de test.
