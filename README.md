@@ -4,8 +4,10 @@ Les différents algorithmes ont leurs propres dossiers, dans lesquels se trouven
 
 ## Simple Maze Solver
 Dans le dossier SimpleMazeSolver se trouve un algorithme utilisant le connected component labeling pour résoudre un labyrinthe, il se lance avec la commande suivante :
+
 *python mazeSolveSimple.py <nom_laby>*  
 *<nom_laby>* étant l'image du labyrinthe .
+
 L'idée de l'algorithme vient de [ce site](http://www.crisluengo.net/index.php/archives/277).
 
 ### Fonctionnement
