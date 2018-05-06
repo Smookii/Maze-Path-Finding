@@ -15,50 +15,26 @@ def ReadPositionFile(namefile):
     endPoint = [int(posEnd.get("x")), int(posEnd.get("y"))]
     return depPoint, endPoint
 
-#marquer départ et fin et noter que deadEnd du skel le plus proch est départ ou fin
-
+#lecture et seuillage
 img = cv2.imread(sys.argv[1],0)
 _ , img = cv2.threshold(img,0,255,cv2.THRESH_BINARY+cv2.THRESH_OTSU)
 cv2.imshow("maze",img)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
-# size = np.size(img)
-# skel = np.zeros(img.shape,np.uint8)
-# ret,img = cv2.threshold(img,127,255,0)
-# element = cv2.getStructuringElement(cv2.MORPH_CROSS,(3,3))
-# done = False
 
-
-# cv2.imshow("test",image)
-# cv2.waitKey(0)
+#skeletonisation
 oute = morphology.skeletonize(img > 0)
 oute = oute.astype(np.uint8)
 skel = oute
 skel[skel>0] = 255
 
 
-# while not done:
-#     eroded = cv2.erode(img,element)
-#     temp = cv2.dilate(eroded,element)
-#     temp = cv2.subtract(img,temp)
-#     skel = cv2.bitwise_or(skel,temp)
-#     img = eroded.copy()
-#
-#     zeros = size - cv2.countNonZero(img)
-#     if zeros==size:
-#         done = True
-
 cv2.imshow("skel",skel)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
-# met les contours en blanc pour garder la l'entrée du labyrinthe
-# height, width = skel.shape[:2]
-# skel[0:1,:]=255
-# skel[:,0:1]=255
-# skel[height-2:height-1][:]=255
-# skel[:,width-2:width-1]=255
 
+#recherche des deadEnd
 maze = np.copy(skel)
 maze = cv2.cvtColor(maze, cv2.COLOR_GRAY2BGR)
 around =  [0,0,1,1,1,-1,-1,-1]
@@ -78,6 +54,7 @@ for x in range(0,skel.shape[0]):
                 deadEnd.append((x,y))
 
 
+#marquage du départ et de la fin
 depPoint, endPoint = ReadPositionFile('param.xml')
 diffDep = 8000000
 diffEnd = 8000000
@@ -87,15 +64,9 @@ for tp in deadEnd:
     if abs(tp[0]-depPoint[0])+abs(tp[1]-depPoint[1])<diffDep:
         diffDep = abs(tp[0]-depPoint[0])+abs(tp[1]-depPoint[1])
         dp = tp
-        #print(f"start : { abs(tp[0]-depPoint[0])+abs(tp[1]-depPoint[1])}")
-        #print(f"tp[0]:{tp[0]} tp[1]:{tp[1]}||depPoint[0]:{depPoint[0]} depPoint[1]:{depPoint[1]}")
-        #print("dp",dp)
     if abs(tp[0]-endPoint[0])+abs(tp[1]-endPoint[1])<diffEnd:
         diffEnd = abs(tp[0]-endPoint[0])+abs(tp[1]-endPoint[1])
         ep = tp
-        #print(f"start : { abs(tp[0]-endPoint[0])+abs(tp[1]-endPoint[1])}")
-        #print(f"tp[0]:{tp[0]} tp[1]:{tp[1]}||endPoint[0]:{endPoint[0]} endPoint[1]:{endPoint[1]}")
-        #print("ep",ep)
 maze[dp[0]][dp[1]] = [0,0,255]
 maze[ep[0]][ep[1]] = [255,0,0]
 deadEnd.remove(dp)
