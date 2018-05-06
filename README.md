@@ -113,7 +113,7 @@ https://github.com/Smookii/Maze-Path-Finding/blob/master/Documentation/Image/Pos
 https://github.com/Smookii/Maze-Path-Finding/blob/master/Documentation/Image/config.PNG "config.xml"
 
 [Skelet]:
-https://github.com/Smookii/Maze-Path-Finding/blob/master/Documentation/Image/skel.PNG "squelette d'un labyrinthe"
+https://github.com/Smookii/Maze-Path-Finding/blob/master/Documentation/Image/skel.png "squelette d'un labyrinthe"
 
 [connectedComponent]:
 https://github.com/Smookii/Maze-Path-Finding/blob/master/Documentation/Image/connectedComponent.PNG "Exemple d'étiquetage d'un labyrinthe"
