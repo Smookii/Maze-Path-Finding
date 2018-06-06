@@ -1,8 +1,8 @@
 Utilisation de la VM : 
 
-user : deb
-pwd : debbie
-pwd-root : debbie
+user : deb  
+pwd : debbie  
+pwd-root : debbie  
 
 Avant tout, 
 
